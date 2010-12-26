@@ -1,22 +1,38 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
+set :rvm_type, :system
+set :rvm_ruby_string, 'ruby-1.9.2' 
+set :application, "ram9ci"
+set :user , application
+set :use_sudo, false
+set :deploy_to, "/home/#{application}/deploy/"
+set :repository,  "git://github.com/robotarmy/#{application}.git"
+set :scm, :git
+set :branch, 'master'
 
-set :scm, :subversion
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+#set :deploy_via, :remote_cache
+ssh_options[:forward_agent] = true
 
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
+role :app, "#{application}.robotarmymade.com"
 
-# If you are using Passenger mod_rails uncomment this:
-# if you're still using the script/reapear helper you will need
-# these http://github.com/rails/irs_process_scripts
+before "deploy:symlink","deploy:#{application}_bootstrap"
+after "deploy:symlink","deploy:#{application}_symlink"
 
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+
+ namespace :deploy do
+  %w(start stop restart).each do |action|   
+     desc "unicorn:#{action}"    
+     task action.to_sym do  
+        find_and_execute_task("unicorn:#{action}")  
+     end  
+   end 
+
+   task "#{application}_bootstrap".to_sym do
+     run <<-CMD
+      mkdir -p #{shared_path}/system
+      mkdir -p #{shared_path}/pids
+     CMD
+   end
+   task "#{application}_symlink".to_sym do
+     run <<-CMD
+     CMD
+   end
+ end
