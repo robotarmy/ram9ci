@@ -1,0 +1,15 @@
+ I need an endpoint for github post commit hooks.
+
+ This endpoint needs to do the following
+ - checkout code
+ - run bundle install --deployment
+ - run rake
+
+ I want the endpoint to show the the result
+ of the rake task on fail otherwise green screen
+
+ concerns :
+  malevolent rake tasks
+  killer whales.
+
+ 
