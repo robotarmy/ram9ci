@@ -1,4 +1,3 @@
-require 'bundler/capistrano'
 set :rvm_type, :system
 set :rvm_ruby_string, 'ruby-1.9.2' 
 set :application, "ram9ci"
