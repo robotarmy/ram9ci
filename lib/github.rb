@@ -32,7 +32,7 @@ def github
       @raw_in  = client.readlines
       @headers = @raw_in[0..-2]
       @body    = @raw_in.last
-      @params  = @raw_in.split('&').inject({}) do |h,k|
+      @params  = @body.split('&').inject({}) do |h,k|
         k, v = k.split('=')
         h[k] = v.unescape.as_json
         h
