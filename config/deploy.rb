@@ -11,28 +11,18 @@ set :branch, 'master'
 #set :deploy_via, :remote_cache
 ssh_options[:forward_agent] = true
 
-role :app, "#{application}.robotarmymade.com"
+role :app, "robotarmymade.com"
+role :db, "robotarmymade.com"
+#role :app, "#{application}.robotarmymade.com"
 
-before "deploy:symlink","deploy:#{application}_bootstrap"
+before "deploy:cold","deploy:#{application}_bootstrap"
 after "deploy:symlink","deploy:#{application}_symlink"
 
-
  namespace :deploy do
-  %w(start stop restart).each do |action|   
-     desc "unicorn:#{action}"    
-     task action.to_sym do  
-        find_and_execute_task("unicorn:#{action}")  
-     end  
-   end 
-
    task "#{application}_bootstrap".to_sym do
-     run <<-CMD
-      mkdir -p #{shared_path}/system
-      mkdir -p #{shared_path}/pids
-     CMD
+     run "mkdir -p #{shared_path}/system"
+     run "mkdir -p #{shared_path}/pids"
    end
    task "#{application}_symlink".to_sym do
-     run <<-CMD
-     CMD
    end
  end
