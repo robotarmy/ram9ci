@@ -18,7 +18,7 @@ def github
     end
     def from(client)
       @raw_in  = client.readlines
-      @headers = @raw_in[0..4]
+      @headers = @raw_in[0..-2]
       @body    = @raw_in.last.unescape
     end
     def to(client)
