@@ -1,5 +1,6 @@
 require 'socket'
 require 'cgi'
+require 'json'
 class String
   def unescape
     CGI.unescape(self)
