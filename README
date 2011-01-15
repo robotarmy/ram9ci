@@ -12,4 +12,13 @@
   malevolent rake tasks
   killer whales.
 
+--
+
+POST / HTTP/1.1
+Accept: */*
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 1555
+Host: ram9.cc:9898
+
+payload=%7b%22ref%22%3a%22refs%2fheads%2fmaster%22%2c%22commits%22%3a%5b%7b%22author%22%3a%7b%22email%22%3a%22github%40robotarmyma.de%22%2c%22name%22%3a%22Curtis%20Schofield%22%2c%22username%22%3a%22robotarmy%22%7d%2c%22timestamp%22%3a%222011-01-15T13%3a26%3a49-08%3a00%22%2c%22url%22%3a%22https%3a%2f%2fgithub.com%2frobotarmy%2fram9ci%2fcommit%2fd4fb34e0465fd662d1719bd266aa55adf290cac2%22%2c%22message%22%3a%22e%22%2c%22modified%22%3a%5b%221%22%5d%2c%22removed%22%3a%5b%5d%2c%22added%22%3a%5b%5d%2c%22id%22%3a%22d4fb34e0465fd662d1719bd266aa55adf290cac2%22%7d%5d%2c%22after%22%3a%22d4fb34e0465fd662d1719bd266aa55adf290cac2%22%2c%22repository%22%3a%7b%22has_wiki%22%3atrue%2c%22created_at%22%3a%222010%2f12%2f25%2019%3a23%3a20%20-0800%22%2c%22url%22%3a%22https%3a%2f%2fgithub.com%2frobotarmy%2fram9ci%22%2c%22description%22%3a%22ci%3f%22%2c%22open_issues%22%3a0%2c%22fork%22%3afalse%2c%22forks%22%3a1%2c%22has_issues%22%3atrue%2c%22private%22%3afalse%2c%22size%22%3a424%2c%22pushed_at%22%3a%222011%2f01%2f15%2013%3a26%3a51%20-0800%22%2c%22language%22%3a%22Ruby%22%2c%22owner%22%3a%7b%22email%22%3a%22github%40robotarmyma.de%22%2c%22name%22%3a%22robotarmy%22%7d%2c%22name%22%3a%22ram9ci%22%2c%22has_downloads%22%3atrue%2c%22watchers%22%3a1%2c%22homepage%22%3a%22%22%7d%2c%22pusher%22%3a%7b%22email%22%3a%22github%40robotarmyma.de%22%2c%22name%22%3a%22robotarmy%22%7d%2c%22forced%22%3afalse%2c%22compare%22%3a%22https%3a%2f%2fgithub.com%2frobotarmy%2fram9ci%2fcompare%2f5b38fb0...d4fb34e%22%2c%22before%22%3a%225b38fb067395ee60ca6adab4321b3bc6816a3a03%22%7d
  
