@@ -1,30 +1,34 @@
 require 'socket'
 def github
   return Object.new.instance_eval do
-    attr_accessor :raw_in, :headers, :body
     def debug(client)
-      puts self.raw_in
-      puts self.headers
-      puts self.body
+      puts @raw_in
+      puts @headers
+      puts @body
     end
     def server
       @server ||= TCPServer.open(9898)
     end
-    def in(client)
-      self.raw_in = client.readlines
-      self.headers = raw_in[0..4]
-      self.body = raw_in.last
+    def from(client)
+      @raw_in  = client.readlines
+      @headers = @raw_in[0..4]
+      @body    = @raw_in.last
     end
-    def out(client)
+    def to(client)
         client.puts(Time.now.ctime)  # Send the time to the client
         client.puts "Closing the connection. Bye!"
     end
     def accept
         client = server.accept       # Wait for a client to connect
-        in(client)
-        debug(client)
-        out(client)
+        begin
+          from(client)
+          debug(client)
+          to(client)
+        rescue Exception => e
+          puts e
+        ensure
         client.close                 # Disconnect from the client
+        end
     end
     def listen
       puts "waiting.."
