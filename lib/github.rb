@@ -1,4 +1,11 @@
 require 'socket'
+require 'cgi'
+class String
+  def unescape
+    CGI.unescape(self)
+  end
+end
+"".unescape
 def github
   return Object.new.instance_eval do
     def debug(client)
@@ -12,7 +19,7 @@ def github
     def from(client)
       @raw_in  = client.readlines
       @headers = @raw_in[0..4]
-      @body    = @raw_in.last
+      @body    = @raw_in.last.unescape
     end
     def to(client)
         client.puts(Time.now.ctime)  # Send the time to the client
