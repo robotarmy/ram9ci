@@ -4,6 +4,17 @@ class String
   def unescape
     CGI.unescape(self)
   end
+  def is_json
+    !as_json.nil?
+  end
+  def as_json
+    j = nil
+    j = JSON.parse(self)
+  rescue JSON::ParserError => e
+    puts  $!
+  ensure
+    j
+  end
 end
 "".unescape
 def github
@@ -12,6 +23,7 @@ def github
       puts @raw_in
       puts @headers
       puts @body
+      puts @params
     end
     def server
       @server ||= TCPServer.open(9898)
@@ -19,7 +31,12 @@ def github
     def from(client)
       @raw_in  = client.readlines
       @headers = @raw_in[0..-2]
-      @body    = @raw_in.last.unescape
+      @body    = @raw_in.last
+      @params  = @raw_in.split('&').inject({}) do |h,k|
+        k, v = k.split('=')
+        h[k] = v.unescape.as_json
+        h
+      end
     end
     def to(client)
         client.puts(Time.now.ctime)  # Send the time to the client
